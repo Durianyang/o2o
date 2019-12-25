@@ -1,5 +1,7 @@
 package top.ywlog.o2o.web;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,12 +16,13 @@ import java.util.List;
 /**
  * Author: Durian
  * Date: 2019/12/25 15:03
- * Description:
+ * Description: Area控制器
  */
 @Controller
 @RequestMapping("/admin")
 public class AreaController
 {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AreaController.class);
     private final AreaService areaService;
     @Autowired
     public AreaController(AreaService areaService)
@@ -31,6 +34,7 @@ public class AreaController
     @ResponseBody
     public JsonMapResult<Area> listArea()
     {
+        LOGGER.info("执行listArea方法");
         JsonMapResult<Area> modelMap = new JsonMapResult<>();
         List<Area> areaList;
         try
@@ -41,10 +45,12 @@ public class AreaController
             modelMap.setSuccess(true);
         } catch (Exception e)
         {
+            LOGGER.error("执行listArea方法失败");
             e.printStackTrace();
             modelMap.setSuccess(false);
             modelMap.setErrMsg(e.toString());
         }
+        LOGGER.info("执行listArea方法成功");
         return modelMap;
     }
 }
