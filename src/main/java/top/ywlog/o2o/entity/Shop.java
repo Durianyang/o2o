@@ -40,7 +40,7 @@ public class Shop
     /** 店铺区域 */
     private Area area;
     /** 店铺所有者信息 */
-    private PersonInfo personInfo;
+    private PersonInfo owner;
     /** 店铺分类信息 */
     private ShopCategory shopCategory;
 }

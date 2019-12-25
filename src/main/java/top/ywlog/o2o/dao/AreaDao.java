@@ -13,6 +13,7 @@ public interface AreaDao
 {
     /**
      * 查询全部区域列表
+     *
      * @return List<Area>
      */
     List<Area> list();

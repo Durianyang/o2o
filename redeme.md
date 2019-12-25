@@ -1,4 +1,11 @@
 ### o2o开发
+
+技术栈：JavaSe， JavaEE， Mysql， HTML， CSS， JS， easyUI， SSM ， logback
+
+开发环境：windows10, Java8, idea2019, mysql5.7, tomcat8.5.47
+
+
+
 #### 一、系统功能模块划分
 - 前端展示系统
 
@@ -27,13 +34,17 @@
     
 #### 实体类设计
 （优化：定义一个创建时间和更新时间的父类）
-- top.ywlog.o2o.entity.Area
-- top.ywlog.o2o.entity.PersonInfo
-- top.ywlog.o2o.entity.LocalAuth 数据库表中local_auth和wechat_auth通过personInfo的userId关联
-- top.ywlog.o2o.entity.WechatAuth 
-- top.ywlog.o2o.entity.HeadLine
-- top.ywlog.o2o.entity.ShopCategory
-- top.ywlog.o2o.entity.Shop
-- top.ywlog.o2o.entity.Product
-- top.ywlog.o2o.entity.ProductCategory
-- top.ywlog.o2o.entity.ProductImg
+- top.ywlog.o2o.entity.Area 区域类
+- top.ywlog.o2o.entity.PersonInfo 用户信息类
+- top.ywlog.o2o.entity.LocalAuth 本地账号类 数据库表中local_auth和wechat_auth通过personInfo的userId关联
+- top.ywlog.o2o.entity.WechatAuth 微信账号类
+- top.ywlog.o2o.entity.HeadLine 头条信息展示
+- top.ywlog.o2o.entity.ShopCategory 店铺分类
+- top.ywlog.o2o.entity.Shop 店铺
+- top.ywlog.o2o.entity.Product 商品
+- top.ywlog.o2o.entity.ProductCategory 商品 分类
+- top.ywlog.o2o.entity.ProductImg 商品详情图片
+
+#### 店铺系统开发
+##### 店铺注册
+
