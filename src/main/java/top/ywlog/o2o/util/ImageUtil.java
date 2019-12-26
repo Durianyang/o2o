@@ -9,6 +9,8 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -28,14 +30,14 @@ public class ImageUtil
     /**
      * 处理缩略图，并返回新生产图片的相对路径
      *
-     * @param thumbnail  org.springframework.web.multipart.commons.CommonsMultipartFile
+     * @param thumbnailInputStream  org.springframework.web.multipart.commons.CommonsMultipartFile
      * @param targetAddr 目标路径
      * @return 新生产图片的相对路径
      */
-    public static String generateThumbnail(File thumbnail, String targetAddr)
+    public static String generateThumbnail(InputStream thumbnailInputStream, String targetAddr, String fileName)
     {
         String realFileName = getRandomFileName();
-        String extension = getFileExtension(thumbnail);
+        String extension = getFileExtension(fileName);
         makeDirPath(targetAddr);
         String relativeAddr = targetAddr + realFileName + extension;
         logger.debug("现在的相对路径是" + relativeAddr);
@@ -43,7 +45,9 @@ public class ImageUtil
         logger.debug(("现在的目标路径是" + dest));
         try
         {
-            Thumbnails.of(thumbnail).size(200, 200).
+            basePath = URLDecoder.decode(basePath,"utf-8");
+            logger.debug("basePath:" + basePath);
+            Thumbnails.of(thumbnailInputStream).size(200, 200).
                     watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/watermark.jpg")), 0.25f).
                     outputQuality(0.8f).toFile(dest);
         } catch (IOException e)
@@ -71,13 +75,12 @@ public class ImageUtil
     /**
      * 获取输入文件的扩展名
      *
-     * @param thumbnail 文件
+     * @param fileName 文件名称
      * @return 文件扩展名
      */
-    private static String getFileExtension(File thumbnail)
+    private static String getFileExtension(String fileName)
     {
-        String originalFileName = thumbnail.getName();
-        return originalFileName.substring(originalFileName.lastIndexOf("."));
+        return fileName.substring(fileName.lastIndexOf("."));
     }
 
     /**
@@ -85,7 +88,7 @@ public class ImageUtil
      *
      * @return 随机文件名
      */
-    private static String getRandomFileName()
+    public static String getRandomFileName()
     {
         // 获取随机五位数
         int randomNum = R.nextInt(89999) + 10000;

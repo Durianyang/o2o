@@ -1,4 +1,4 @@
-package top.ywlog.o2o.web;
+package top.ywlog.o2o.web.admin;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

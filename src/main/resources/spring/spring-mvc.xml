@@ -14,6 +14,15 @@
         <property name="prefix" value="/WEB-INF/html/" />
         <property name="suffix" value=".html" />
     </bean>
+    <!--处理request中参数问题-->
+    <!--文件上传解析器-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8"/>
+        <!--1024*1024*20-->
+        <property name="maxUploadSize" value="20971520"/>
+        <property name="maxInMemorySize" value="20971520"/>
+    </bean>
+
     <!-- 配置静态资源映射  -->
     <!-- 指定/WEB-INF/js   /WEB-INF/css/  下的所有的静态资源包括子目录下的静态资源  都不被拦截-->
     <!--  mapping=/js/**  :表示访问静态资源的路径的形式    可以访问 /js/下的静态资源或者所有的子目录下的静态资源-->

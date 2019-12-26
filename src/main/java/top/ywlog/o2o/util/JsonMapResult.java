@@ -13,6 +13,7 @@ import java.util.List;
 public class JsonMapResult<T>
 {
     private List<T> rows;
+    private T row;
     private Integer total;
     private Boolean success;
     private String errMsg;
