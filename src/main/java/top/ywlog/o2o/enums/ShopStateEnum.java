@@ -5,7 +5,7 @@ import lombok.Getter;
 /**
  * Author: Durian
  * Date: 2019/12/26 12:30
- * Description: 商品状态枚举类
+ * Description: 商铺状态枚举类
  */
 @Getter
 public enum ShopStateEnum

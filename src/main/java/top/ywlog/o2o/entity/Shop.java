@@ -1,5 +1,6 @@
 package top.ywlog.o2o.entity;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,8 +12,7 @@ import java.util.Date;
  * Date: 2019/12/25 13:16
  * Description: 店铺实体类
  */
-@Getter
-@Setter
+@Data
 public class Shop
 {
     /** 店铺Id */

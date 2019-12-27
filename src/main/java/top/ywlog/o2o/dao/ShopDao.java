@@ -1,6 +1,9 @@
 package top.ywlog.o2o.dao;
 
+import org.apache.ibatis.annotations.Param;
 import top.ywlog.o2o.entity.Shop;
+
+import java.util.List;
 
 /**
  * Author: Durian
@@ -24,4 +27,26 @@ public interface ShopDao
      * @return int 更新影响行数
      */
     int updateShop(Shop shop);
+
+    /**
+     * 根据店铺ID查询店铺信息
+     *
+     * @param shopId 店铺ID
+     * @return 店铺信息
+     */
+    Shop getShopById(Long shopId);
+
+
+    /**
+     * 分页查询店铺列表，可查询条件：店铺名（模糊），店铺状态，店铺类别，区域ID，owner
+     *
+     * @param shopCondition 查询条件
+     * @param rowIndex      从第几行开始
+     * @param pageSize      每页大小
+     * @return 每页的List<Shop>
+     */
+    List<Shop> listShopPage(@Param("shopCondition") Shop shopCondition,
+                            @Param("rowIndex") int rowIndex,
+                            @Param("pageSize") int pageSize);
+
 }

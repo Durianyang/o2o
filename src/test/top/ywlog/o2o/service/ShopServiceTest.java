@@ -47,4 +47,15 @@ public class ShopServiceTest extends BaseTest
         ShopExecution shopExecution = shopService.addShop(shop, in, shopImg.getName());
         System.out.println(shopExecution.getStateInfo());
     }
+
+    @Test
+    public void updateShopTest() throws FileNotFoundException
+    {
+        Shop shop = shopService.getShopById(68L);
+        shop.setShopName("茶颜悦色");
+        File shopImg = new File("C:\\Users\\Durian\\Pictures\\Saved Pictures\\212516-15666531161ade.jpg");
+        InputStream in = new FileInputStream(shopImg);
+        ShopExecution shopExecution = shopService.updateShop(shop, in, shopImg.getName());
+        System.out.println(shopExecution.getStateInfo());
+    }
 }

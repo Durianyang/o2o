@@ -30,8 +30,8 @@ public class ImageUtil
     /**
      * 处理缩略图，并返回新生产图片的相对路径
      *
-     * @param thumbnailInputStream  org.springframework.web.multipart.commons.CommonsMultipartFile
-     * @param targetAddr 目标路径
+     * @param thumbnailInputStream org.springframework.web.multipart.commons.CommonsMultipartFile
+     * @param targetAddr           目标路径
      * @return 新生产图片的相对路径
      */
     public static String generateThumbnail(InputStream thumbnailInputStream, String targetAddr, String fileName)
@@ -45,7 +45,7 @@ public class ImageUtil
         logger.debug(("现在的目标路径是" + dest));
         try
         {
-            basePath = URLDecoder.decode(basePath,"utf-8");
+            basePath = URLDecoder.decode(basePath, "utf-8");
             logger.debug("basePath:" + basePath);
             Thumbnails.of(thumbnailInputStream).size(200, 200).
                     watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/watermark.jpg")), 0.25f).
@@ -98,6 +98,7 @@ public class ImageUtil
 
     /**
      * 文件转存
+     *
      * @param file org.springframework.web.multipart.commons.CommonsMultipartFile
      * @return newFile
      */
@@ -113,6 +114,29 @@ public class ImageUtil
             e.printStackTrace();
         }
         return newFile;
+    }
+
+    /**
+     * 删除图片文件或路径
+     * storePath是文件则删除该文件，是目录则删除该目录下文件所有
+     *
+     * @param storePath 路径
+     */
+    public static void deleteImgFile(String storePath)
+    {
+        File fileOrPath = new File(PathUtil.getImgBasePath() + storePath);
+        if (fileOrPath.exists())
+        {
+            if (fileOrPath.isDirectory())
+            {
+                File[] files = fileOrPath.listFiles();
+                for (File file : files)
+                {
+                    file.delete();
+                }
+            }
+            fileOrPath.delete();
+        }
     }
 
     public static void main(String[] args)

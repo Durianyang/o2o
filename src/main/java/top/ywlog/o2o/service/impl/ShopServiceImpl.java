@@ -1,5 +1,6 @@
 package top.ywlog.o2o.service.impl;
 
+import com.alibaba.druid.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -84,9 +85,60 @@ public class ShopServiceImpl implements ShopService
         return shopExecution;
     }
 
+    @Override
+    public Shop getShopById(Long shopId)
+    {
+        return shopDao.getShopById(shopId);
+    }
+
+    @Override
+    public ShopExecution updateShop(Shop shop, InputStream shopImgInputStream, String fileName)
+    {
+        int effectedNum = 0;
+        if (shop == null || shop.getShopId() == null)
+        {
+            return new ShopExecution(ShopStateEnum.NULL_SHOP);
+        } else
+        {
+            try
+            {
+                // 判断是否需要处理图片
+                if (shopImgInputStream != null && !StringUtils.isEmpty(fileName))
+                {
+                    // 获取未更新的shop对象
+                    Shop tempShop = shopDao.getShopById(shop.getShopId());
+                    // 删除原来的图片
+                    if (tempShop.getShopImg() != null)
+                    {
+                        ImageUtil.deleteImgFile(tempShop.getShopImg());
+                    }
+                    addShopImg(shop, shopImgInputStream, fileName);
+                }
+                // 更新店铺信息
+                shop.setLastEditTime(new Date());
+                effectedNum = shopDao.updateShop(shop);
+                if (effectedNum <= 0)
+                {
+                    return new ShopExecution(ShopStateEnum.INNER_ERROR);
+                } else
+                {
+                    shop = shopDao.getShopById(shop.getShopId());
+                    ShopExecution shopExecution = new ShopExecution(ShopStateEnum.SUCCESS, shop);
+                    shopExecution.setCount(effectedNum);
+                    shopExecution.setState(ShopStateEnum.SUCCESS.getState());
+                    return shopExecution;
+                }
+            } catch (Exception e)
+            {
+                throw new ShopOperationException("更新店铺信息失败!" + e.getMessage());
+            }
+        }
+    }
+
     /**
      * 存储店铺图片
-     * @param shop 店铺信息
+     *
+     * @param shop               店铺信息
      * @param shopImgInputStream 店铺图片
      */
     private void addShopImg(Shop shop, InputStream shopImgInputStream, String fileName)

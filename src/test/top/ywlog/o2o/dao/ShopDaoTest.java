@@ -75,4 +75,11 @@ public class ShopDaoTest
         int i = shopDao.updateShop(shop);
         System.out.println(i);
     }
+
+    @Test
+    public void getShopTest()
+    {
+        Shop shop = shopDao.getShopById(68L);
+        System.out.println(shop.getArea().getAreaName());
+    }
 }
