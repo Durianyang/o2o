@@ -90,7 +90,7 @@ public class ShopManagementController
         if (shop != null && shopImg != null)
         {
             // 测试用
-            PersonInfo owner = (PersonInfo)request.getSession().getAttribute("user");
+            PersonInfo owner = (PersonInfo) request.getSession().getAttribute("user");
             shop.setOwner(owner);
             ShopExecution se = new ShopExecution();
             try
@@ -251,16 +251,18 @@ public class ShopManagementController
 
     @RequestMapping(value = "/getShopList", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object>  getShopList(@RequestParam(defaultValue = "0") int pageIndex,
-                                            @RequestParam(defaultValue = "100") int pageSize,
-                                            HttpServletRequest request)
+    public Map<String, Object> getShopList(@RequestParam(defaultValue = "0") int pageIndex,
+                                           @RequestParam(defaultValue = "100") int pageSize,
+                                           HttpServletRequest request)
     {
         Map<String, Object> model = new HashMap<>(3);
+        // 测试
         PersonInfo user = new PersonInfo();
         user.setUserId(8L);
         user.setName("测试");
         request.getSession().setAttribute("user", user);
-        user = (PersonInfo)request.getSession().getAttribute("user");
+        //
+        user = (PersonInfo) request.getSession().getAttribute("user");
         Shop shopCondition = new Shop();
         shopCondition.setOwner(user);
         try
@@ -292,7 +294,7 @@ public class ShopManagementController
                 model.put("url", "/o2o/shop/shopList");
             } else
             {
-                Shop currentShop = (Shop)currentShopObj;
+                Shop currentShop = (Shop) currentShopObj;
                 model.put("redirect", false);
                 model.put("shopId", currentShop.getShopId());
             }

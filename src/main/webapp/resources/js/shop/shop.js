@@ -30,7 +30,7 @@ $(function () {
                     if (shop.area.areaId == item.areaId) {
                         tempAreaHtml += '<option data-id ="' + item.areaId + '" selected="selected">'
                             + item.areaName + '</option>';
-                    }else {
+                    } else {
                         tempAreaHtml += '<option data-id ="' + item.areaId + '">'
                             + item.areaName + '</option>';
                     }
@@ -103,9 +103,9 @@ $(function () {
                 if (data.success) {
                     $.toast('提交成功!');
                     if (isEdit) {
-                        window.setTimeout("window.location='/o2o/shop/shopManagement?shopId=" +data.row.shopId + "'",750);
+                        window.setTimeout("window.location='/o2o/shop/shopManagement?shopId=" + data.row.shopId + "'", 750);
                     } else if (!isEdit) {
-                        window.setTimeout("window.location='/o2o/shop/shopList'",750);
+                        window.setTimeout("window.location='/o2o/shop/shopList'", 750);
                     }
                 } else {
                     $.toast('提交失败!' + data.errMsg);
@@ -115,6 +115,4 @@ $(function () {
             }
         });
     });
-
-
 });
