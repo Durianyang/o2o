@@ -11,6 +11,7 @@ import top.ywlog.o2o.entity.Shop;
 import top.ywlog.o2o.entity.ShopCategory;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Author: Durian
@@ -82,4 +83,32 @@ public class ShopDaoTest
         Shop shop = shopDao.getShopById(68L);
         System.out.println(shop.getArea().getAreaName());
     }
+
+    @Test
+    public void shopCountTest()
+    {
+        Shop shop = new Shop();
+        shop.setShopName("旧车");
+        int count = shopDao.shopCount(shop);
+        System.out.println("count = " + count);
+    }
+
+    @Test
+    public void shopListPageTest()
+    {
+        Shop shop = new Shop();
+        PersonInfo owner = new PersonInfo();
+        owner.setUserId(8L);
+        shop.setOwner(owner);
+        shop.setShopName("旧车");
+        int count = shopDao.shopCount(shop);
+        System.out.println(count);
+        List<Shop> shopList = shopDao.listShopPage(shop, 0, 30);
+        for (Shop shop1 : shopList)
+        {
+            System.out.println("shop1 = " + shop1);
+        }
+
+    }
+
 }

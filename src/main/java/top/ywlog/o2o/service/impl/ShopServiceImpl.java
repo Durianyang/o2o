@@ -12,10 +12,12 @@ import top.ywlog.o2o.enums.ShopStateEnum;
 import top.ywlog.o2o.exceptions.ShopOperationException;
 import top.ywlog.o2o.service.ShopService;
 import top.ywlog.o2o.util.ImageUtil;
+import top.ywlog.o2o.util.PageCalculator;
 import top.ywlog.o2o.util.PathUtil;
 
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Author: Durian
@@ -133,6 +135,27 @@ public class ShopServiceImpl implements ShopService
                 throw new ShopOperationException("更新店铺信息失败!" + e.getMessage());
             }
         }
+    }
+
+    @Override
+    public ShopExecution listShopPage(Shop shopCondition, int pageIndex, int pageSize)
+    {
+        int rowIndex = PageCalculator.calculatorRowIndex(pageIndex, pageSize);
+        List<Shop> shopList = shopDao.listShopPage(shopCondition, rowIndex, pageSize);
+        int count = shopDao.shopCount(shopCondition);
+        ShopExecution shopExecution = new ShopExecution();
+        if (shopList != null && shopList.size() != 0)
+        {
+            shopExecution.setShopList(shopList);
+            shopExecution.setCount(count);
+            shopExecution.setState(ShopStateEnum.SUCCESS.getState());
+            shopExecution.setStateInfo(ShopStateEnum.SUCCESS.getStateInfo());
+        } else
+        {
+            shopExecution.setState(ShopStateEnum.INNER_ERROR.getState());
+            shopExecution.setStateInfo(ShopStateEnum.INNER_ERROR.getStateInfo());
+        }
+        return shopExecution;
     }
 
     /**

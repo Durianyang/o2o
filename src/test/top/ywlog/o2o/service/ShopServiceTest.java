@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * Author: Durian
@@ -58,4 +59,20 @@ public class ShopServiceTest extends BaseTest
         ShopExecution shopExecution = shopService.updateShop(shop, in, shopImg.getName());
         System.out.println(shopExecution.getStateInfo());
     }
+
+    @Test
+    public void listShopPageTest()
+    {
+        Shop shopCondition = new Shop();
+        ShopCategory shopCategory = new ShopCategory();
+        shopCategory.setShopCategoryId(22L);
+        shopCondition.setShopCategory(shopCategory);
+        ShopExecution listShopPage = shopService.listShopPage(shopCondition, 1, 10);
+        List<Shop> shopList = listShopPage.getShopList();
+        for (Shop shop : shopList)
+        {
+            System.out.println("shop = " + shop);
+        }
+    }
+
 }

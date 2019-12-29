@@ -40,4 +40,14 @@ public interface ShopService
      * @return top.ywlog.o2o.dto.ShopExecution
      */
     ShopExecution updateShop(Shop shop, InputStream shopImgInputStream, String fileName) throws ShopOperationException;
+
+    /**
+     * 按条件分页查询Shop
+     *
+     * @param shopCondition 查询条件
+     * @param pageIndex     查询页数
+     * @param pageSize      每页大小
+     * @return top.ywlog.o2o.dto.ShopExecution
+     */
+    ShopExecution listShopPage(Shop shopCondition, int pageIndex, int pageSize);
 }

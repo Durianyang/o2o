@@ -49,4 +49,12 @@ public interface ShopDao
                             @Param("rowIndex") int rowIndex,
                             @Param("pageSize") int pageSize);
 
+
+    /**
+     * 查询符合条件的shop总数
+     *
+     * @param shopCondition 查询条件
+     * @return shop总行数
+     */
+    int shopCount(@Param("shopCondition")Shop shopCondition);
 }
