@@ -63,10 +63,6 @@ $(function () {
         });
     }
 
-    function goManagePage(shopId) {
-        window.location.href = '/o2o/shop/shopManagement?shopId=' + shopId;
-    }
-
     $('#submit').click(function () {
         var shop = {};
         if (isEdit) {
@@ -106,7 +102,11 @@ $(function () {
             success: function (data) {
                 if (data.success) {
                     $.toast('提交成功!');
-                    window.setTimeout("window.location='/o2o/shop/shopManagement?shopId=" +data.row.shopId + "'",500);
+                    if (isEdit) {
+                        window.setTimeout("window.location='/o2o/shop/shopManagement?shopId=" +data.row.shopId + "'",750);
+                    } else if (!isEdit) {
+                        window.setTimeout("window.location='/o2o/shop/shopList'",750);
+                    }
                 } else {
                     $.toast('提交失败!' + data.errMsg);
                 }
