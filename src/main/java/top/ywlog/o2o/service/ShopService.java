@@ -5,6 +5,7 @@ import top.ywlog.o2o.entity.Shop;
 import top.ywlog.o2o.exceptions.ShopOperationException;
 
 import java.io.InputStream;
+import java.io.OptionalDataException;
 
 /**
  * Author: Durian
@@ -49,5 +50,5 @@ public interface ShopService
      * @param pageSize      每页大小
      * @return top.ywlog.o2o.dto.ShopExecution
      */
-    ShopExecution listShopPage(Shop shopCondition, int pageIndex, int pageSize);
+    ShopExecution listShopPage(Shop shopCondition, int pageIndex, int pageSize) throws OptionalDataException;
 }

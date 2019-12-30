@@ -136,5 +136,10 @@
 String verifyCodeExpected = (String) request.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
 String verifyCodeInput = HttpServletRequestUtil.getString(request, "verifyCodeInput");
 `````
+##### 店铺修改
+##### 店铺列表展示
+#### 店铺管理
+##### 店铺商品类别管理
+
 
 

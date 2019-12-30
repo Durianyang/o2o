@@ -39,7 +39,7 @@ public class ShopServiceImpl implements ShopService
     @Transactional(propagation = Propagation.REQUIRED)
     public ShopExecution addShop(Shop shop, InputStream shopImgInputStream, String fileName) throws ShopOperationException
     {
-        int effectedNum = 0;
+        int effectedNum;
         // 还可以对店铺的区域等信息判断
         if (shop == null)
         {
@@ -88,15 +88,17 @@ public class ShopServiceImpl implements ShopService
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Shop getShopById(Long shopId)
     {
         return shopDao.getShopById(shopId);
     }
 
     @Override
-    public ShopExecution updateShop(Shop shop, InputStream shopImgInputStream, String fileName)
+    @Transactional(propagation = Propagation.REQUIRED)
+    public ShopExecution updateShop(Shop shop, InputStream shopImgInputStream, String fileName) throws ShopOperationException
     {
-        int effectedNum = 0;
+        int effectedNum;
         if (shop == null || shop.getShopId() == null)
         {
             return new ShopExecution(ShopStateEnum.NULL_SHOP);
@@ -138,6 +140,7 @@ public class ShopServiceImpl implements ShopService
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public ShopExecution listShopPage(Shop shopCondition, int pageIndex, int pageSize)
     {
         int rowIndex = PageCalculator.calculatorRowIndex(pageIndex, pageSize);

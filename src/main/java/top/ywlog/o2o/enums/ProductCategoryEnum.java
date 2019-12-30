@@ -12,7 +12,8 @@ public enum ProductCategoryEnum
 {
     NULL_SHOPID(-1002, "店铺ID为空"),
     SUCCESS(1, "操作成功"),
-    INNER_ERROR(-1001, "系统错误");
+    INNER_ERROR(-1001, "操作失败"),
+    EMPTY_LIST(-1003, "分类列表为空");
 
     private int state;
     private String stateInfo;
@@ -23,7 +24,7 @@ public enum ProductCategoryEnum
         this.stateInfo = stateInfo;
     }
 
-    public static ProductCategoryEnum getShopStateEnumByState(int state)
+    public static ProductCategoryEnum getStateInfoByState(int state)
     {
         for (ProductCategoryEnum productCategoryEnum : values())
         {

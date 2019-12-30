@@ -9,10 +9,7 @@ import top.ywlog.o2o.entity.PersonInfo;
 import top.ywlog.o2o.entity.Shop;
 import top.ywlog.o2o.entity.ShopCategory;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.List;
 
 /**
@@ -61,7 +58,7 @@ public class ShopServiceTest extends BaseTest
     }
 
     @Test
-    public void listShopPageTest()
+    public void listShopPageTest() throws OptionalDataException
     {
         Shop shopCondition = new Shop();
         ShopCategory shopCategory = new ShopCategory();
