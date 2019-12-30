@@ -12,7 +12,7 @@ import top.ywlog.o2o.entity.Shop;
 import top.ywlog.o2o.enums.ProductCategoryEnum;
 import top.ywlog.o2o.exceptions.ProductCategoryException;
 import top.ywlog.o2o.service.ProductCategoryService;
-import top.ywlog.o2o.util.JsonMapResult;
+import top.ywlog.o2o.dto.JsonMapResult;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;

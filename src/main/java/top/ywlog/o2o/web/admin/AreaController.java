@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import top.ywlog.o2o.entity.Area;
 import top.ywlog.o2o.service.AreaService;
-import top.ywlog.o2o.util.JsonMapResult;
+import top.ywlog.o2o.dto.JsonMapResult;
 
 import java.util.List;
 

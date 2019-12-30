@@ -5,11 +5,11 @@ import net.coobird.thumbnailator.geometry.Positions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import top.ywlog.o2o.dto.ImageHolder;
 
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,14 +30,14 @@ public class ImageUtil
     /**
      * 处理缩略图，并返回新生产图片的相对路径
      *
-     * @param thumbnailInputStream org.springframework.web.multipart.commons.CommonsMultipartFile
+     * @param thumbnail org.springframework.web.multipart.commons.CommonsMultipartFile
      * @param targetAddr           目标路径
      * @return 新生产图片的相对路径
      */
-    public static String generateThumbnail(InputStream thumbnailInputStream, String targetAddr, String fileName)
+    public static String generateThumbnail(ImageHolder thumbnail, String targetAddr)
     {
         String realFileName = getRandomFileName();
-        String extension = getFileExtension(fileName);
+        String extension = getFileExtension(thumbnail.getImageName());
         makeDirPath(targetAddr);
         String relativeAddr = targetAddr + realFileName + extension;
         logger.debug("现在的相对路径是" + relativeAddr);
@@ -47,7 +47,7 @@ public class ImageUtil
         {
             basePath = URLDecoder.decode(basePath, "utf-8");
             logger.debug("basePath:" + basePath);
-            Thumbnails.of(thumbnailInputStream).size(200, 200).
+            Thumbnails.of(thumbnail.getImage()).size(200, 200).
                     watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/watermark.jpg")), 0.25f).
                     outputQuality(0.8f).toFile(dest);
         } catch (IOException e)

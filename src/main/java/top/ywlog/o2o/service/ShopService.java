@@ -1,10 +1,10 @@
 package top.ywlog.o2o.service;
 
+import top.ywlog.o2o.dto.ImageHolder;
 import top.ywlog.o2o.dto.ShopExecution;
 import top.ywlog.o2o.entity.Shop;
 import top.ywlog.o2o.exceptions.ShopOperationException;
 
-import java.io.InputStream;
 import java.io.OptionalDataException;
 
 /**
@@ -19,10 +19,9 @@ public interface ShopService
      *
      * @param shop               添加的店铺信息
      * @param shopImgInputStream 添加的店铺图片
-     * @param fileName           图片文件名称
      * @return top.ywlog.o2o.dto.ShopExecution
      */
-    ShopExecution addShop(Shop shop, InputStream shopImgInputStream, String fileName) throws ShopOperationException;
+    ShopExecution addShop(Shop shop, ImageHolder shopImgInputStream) throws ShopOperationException;
 
     /**
      * 根据店铺ID查询店铺信息
@@ -37,10 +36,9 @@ public interface ShopService
      *
      * @param shop               更新的店铺信息
      * @param shopImgInputStream 更新的店铺图片
-     * @param fileName           图片文件名称
      * @return top.ywlog.o2o.dto.ShopExecution
      */
-    ShopExecution updateShop(Shop shop, InputStream shopImgInputStream, String fileName) throws ShopOperationException;
+    ShopExecution updateShop(Shop shop, ImageHolder shopImgInputStream) throws ShopOperationException;
 
     /**
      * 按条件分页查询Shop

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import top.ywlog.o2o.dto.ImageHolder;
+import top.ywlog.o2o.dto.JsonMapResult;
 import top.ywlog.o2o.dto.ShopExecution;
 import top.ywlog.o2o.entity.Area;
 import top.ywlog.o2o.entity.PersonInfo;
@@ -95,7 +97,10 @@ public class ShopManagementController
             ShopExecution se = new ShopExecution();
             try
             {
-                se = shopService.addShop(shop, shopImg.getInputStream(), shopImg.getOriginalFilename());
+                ImageHolder imageHolder = new ImageHolder();
+                imageHolder.setImage(shopImg.getInputStream());
+                imageHolder.setImageName(shopImg.getOriginalFilename());
+                se = shopService.addShop(shop, imageHolder);
             } catch (IOException e)
             {
                 result.setSuccess(false);
@@ -219,10 +224,13 @@ public class ShopManagementController
             {
                 if (shopImg == null)
                 {
-                    se = shopService.updateShop(shop, null, null);
+                    se = shopService.updateShop(shop, null);
                 } else
                 {
-                    se = shopService.updateShop(shop, shopImg.getInputStream(), shopImg.getOriginalFilename());
+                    ImageHolder imageHolder = new ImageHolder();
+                    imageHolder.setImage(shopImg.getInputStream());
+                    imageHolder.setImageName(shopImg.getOriginalFilename());
+                    se = shopService.updateShop(shop, imageHolder);
                 }
             } catch (ShopOperationException | IOException e)
             {

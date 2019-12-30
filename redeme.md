@@ -137,9 +137,12 @@ String verifyCodeExpected = (String) request.getSession().getAttribute(com.googl
 String verifyCodeInput = HttpServletRequestUtil.getString(request, "verifyCodeInput");
 `````
 ##### 店铺修改
-##### 店铺列表展示
+#### 店铺列表展示
 #### 店铺管理
-##### 店铺商品类别管理
+#### 店铺商品类别管理
+##### 商品类别添加
+##### 商品类别删除
+> 删除商品类别时需要先将该类别下的所有商品的分类ID置为空
 
 
 

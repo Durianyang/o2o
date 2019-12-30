@@ -3,6 +3,7 @@ package top.ywlog.o2o.service;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import top.ywlog.o2o.BaseTest;
+import top.ywlog.o2o.dto.ImageHolder;
 import top.ywlog.o2o.dto.ShopExecution;
 import top.ywlog.o2o.entity.Area;
 import top.ywlog.o2o.entity.PersonInfo;
@@ -41,8 +42,10 @@ public class ShopServiceTest extends BaseTest
         shop.setShopDesc("店铺service测试");
         shop.setShopName("店铺service测试");
         File shopImg = new File("C:\\Users\\Durian\\Pictures\\Saved Pictures\\190337-1574852617ea0a.jpg");
-        InputStream in = new FileInputStream(shopImg);
-        ShopExecution shopExecution = shopService.addShop(shop, in, shopImg.getName());
+        ImageHolder imageHolder = new ImageHolder();
+        imageHolder.setImage(new FileInputStream(shopImg));
+        imageHolder.setImageName(shopImg.getName());
+        ShopExecution shopExecution = shopService.addShop(shop, imageHolder);
         System.out.println(shopExecution.getStateInfo());
     }
 
@@ -52,8 +55,10 @@ public class ShopServiceTest extends BaseTest
         Shop shop = shopService.getShopById(68L);
         shop.setShopName("茶颜悦色");
         File shopImg = new File("C:\\Users\\Durian\\Pictures\\Saved Pictures\\212516-15666531161ade.jpg");
-        InputStream in = new FileInputStream(shopImg);
-        ShopExecution shopExecution = shopService.updateShop(shop, in, shopImg.getName());
+        ImageHolder imageHolder = new ImageHolder();
+        imageHolder.setImage(new FileInputStream(shopImg));
+        imageHolder.setImageName(shopImg.getName());
+        ShopExecution shopExecution = shopService.updateShop(shop, imageHolder);
         System.out.println(shopExecution.getStateInfo());
     }
 
