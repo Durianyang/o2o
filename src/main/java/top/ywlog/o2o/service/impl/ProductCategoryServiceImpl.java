@@ -8,7 +8,7 @@ import top.ywlog.o2o.dao.ProductCategoryDao;
 import top.ywlog.o2o.dto.ProductCategoryExecution;
 import top.ywlog.o2o.entity.ProductCategory;
 import top.ywlog.o2o.enums.ProductCategoryEnum;
-import top.ywlog.o2o.exceptions.ProductCategoryException;
+import top.ywlog.o2o.exceptions.ProductCategoryOperationException;
 import top.ywlog.o2o.service.ProductCategoryService;
 
 import java.util.List;
@@ -37,7 +37,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService
     }
 
     @Override
-    public ProductCategoryExecution batchInsert(List<ProductCategory> productCategories) throws ProductCategoryException
+    public ProductCategoryExecution batchInsert(List<ProductCategory> productCategories) throws ProductCategoryOperationException
     {
         if (productCategories != null && productCategories.size() > 0)
         {
@@ -53,7 +53,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService
                 }
             } catch (Exception e)
             {
-                throw new ProductCategoryException("batchInsert ProductCategory Error: " + e.getMessage());
+                throw new ProductCategoryOperationException("batchInsert ProductCategory Error: " + e.getMessage());
             }
         } else
         {
@@ -63,7 +63,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public ProductCategoryExecution deleteProductCategory(Long productCategoryId, Long shopId) throws ProductCategoryException
+    public ProductCategoryExecution deleteProductCategory(Long productCategoryId, Long shopId) throws ProductCategoryOperationException
     {
         // 首先将该分类下所有商品的分类ID置为空
         try
@@ -71,14 +71,14 @@ public class ProductCategoryServiceImpl implements ProductCategoryService
             int count = productCategoryDao.deleteProductCategory(productCategoryId, shopId);
             if (count <= 0)
             {
-                throw new ProductCategoryException("商品类别删除失败！");
+                throw new ProductCategoryOperationException("商品类别删除失败！");
             } else
             {
                 return new ProductCategoryExecution(ProductCategoryEnum.SUCCESS, count);
             }
-        } catch (ProductCategoryException e)
+        } catch (ProductCategoryOperationException e)
         {
-            throw new ProductCategoryException("delete productCategory Error: " + e.getMessage());
+            throw new ProductCategoryOperationException("delete productCategory Error: " + e.getMessage());
         }
     }
 }

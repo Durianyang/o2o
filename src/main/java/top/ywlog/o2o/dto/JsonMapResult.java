@@ -1,4 +1,4 @@
-package top.ywlog.o2o.util;
+package top.ywlog.o2o.dto;
 
 import lombok.Data;
 

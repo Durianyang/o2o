@@ -5,9 +5,9 @@ package top.ywlog.o2o.exceptions;
  * Date: 2019/12/30 13:49
  * Description:
  */
-public class ProductCategoryException extends RuntimeException
+public class ProductCategoryOperationException extends RuntimeException
 {
-    public ProductCategoryException(String msg)
+    public ProductCategoryOperationException(String msg)
     {
         super(msg);
     }

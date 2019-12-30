@@ -16,4 +16,12 @@ public class ImageHolder
 {
     private InputStream image;
     private String imageName;
+
+    public ImageHolder(){}
+
+    public ImageHolder(InputStream image, String imageName)
+    {
+        this.image = image;
+        this.imageName = imageName;
+    }
 }

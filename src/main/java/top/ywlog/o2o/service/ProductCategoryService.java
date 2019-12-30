@@ -2,7 +2,7 @@ package top.ywlog.o2o.service;
 
 import top.ywlog.o2o.dto.ProductCategoryExecution;
 import top.ywlog.o2o.entity.ProductCategory;
-import top.ywlog.o2o.exceptions.ProductCategoryException;
+import top.ywlog.o2o.exceptions.ProductCategoryOperationException;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public interface ProductCategoryService
      * @param productCategories 待添加分类列表
      * @return top.ywlog.o2o.dto.ProductCategoryExecution
      */
-    ProductCategoryExecution batchInsert(List<ProductCategory> productCategories) throws ProductCategoryException;
+    ProductCategoryExecution batchInsert(List<ProductCategory> productCategories) throws ProductCategoryOperationException;
 
     /**
      * 将该分类下的所有商品的分类Id置为空,再删除商品分类

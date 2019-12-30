@@ -10,7 +10,7 @@ import top.ywlog.o2o.dto.ProductCategoryExecution;
 import top.ywlog.o2o.entity.ProductCategory;
 import top.ywlog.o2o.entity.Shop;
 import top.ywlog.o2o.enums.ProductCategoryEnum;
-import top.ywlog.o2o.exceptions.ProductCategoryException;
+import top.ywlog.o2o.exceptions.ProductCategoryOperationException;
 import top.ywlog.o2o.service.ProductCategoryService;
 import top.ywlog.o2o.dto.JsonMapResult;
 
@@ -83,7 +83,7 @@ public class ProductCategoryManagementController
                     result.setRows(pe.getProductCategoryList());
                     result.setTotal(pe.getCount());
                 }
-            } catch (ProductCategoryException e)
+            } catch (ProductCategoryOperationException e)
             {
                 result.setSuccess(false);
                 result.setErrMsg(e.toString());
@@ -122,7 +122,7 @@ public class ProductCategoryManagementController
             } catch (Exception e)
             {
                 result.setSuccess(false);
-                result.setErrMsg(e.toString());
+                result.setErrMsg("删除失败！");
             }
         } else
         {

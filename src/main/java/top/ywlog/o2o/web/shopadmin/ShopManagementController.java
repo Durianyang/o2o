@@ -235,7 +235,7 @@ public class ShopManagementController
             } catch (ShopOperationException | IOException e)
             {
                 result.setSuccess(false);
-                result.setErrMsg(e.getMessage());
+                result.setErrMsg("更新失败！");
             }
 
             if (se.getState() == ShopStateEnum.SUCCESS.getState())

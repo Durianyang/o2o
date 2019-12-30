@@ -58,6 +58,36 @@ public class ImageUtil
     }
 
     /**
+     * 处理详情图，并返回新生产图片的相对路径
+     *
+     * @param thumbnail org.springframework.web.multipart.commons.CommonsMultipartFile
+     * @param targetAddr           目标路径
+     * @return 新生产图片的相对路径
+     */
+    public static String generateNormalImg(ImageHolder thumbnail, String targetAddr)
+    {
+        String realFileName = getRandomFileName();
+        String extension = getFileExtension(thumbnail.getImageName());
+        makeDirPath(targetAddr);
+        String relativeAddr = targetAddr + realFileName + extension;
+        logger.debug("现在的相对路径是" + relativeAddr);
+        File dest = new File(PathUtil.getImgBasePath() + relativeAddr);
+        logger.debug(("现在的目标路径是" + dest));
+        try
+        {
+            basePath = URLDecoder.decode(basePath, "utf-8");
+            logger.debug("basePath:" + basePath);
+            Thumbnails.of(thumbnail.getImage()).size(337, 640).
+                    watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/watermark.jpg")), 0.25f).
+                    outputQuality(0.9f).toFile(dest);
+        } catch (IOException e)
+        {
+            throw new RuntimeException("创建缩略图失败：" + e.toString());
+        }
+        return relativeAddr;
+    }
+
+    /**
      * 创建目标路径上所涉及的目录
      *
      * @param targetAddr 目标路径
