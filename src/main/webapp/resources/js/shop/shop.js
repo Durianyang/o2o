@@ -88,7 +88,7 @@ $(function () {
         formData.append('shop', JSON.stringify(shop));
         var verifyCode = $('#j_kaptcha').val();
         if (!verifyCode) {
-            $.toast('请输入验证码!');
+            $.toast('请输入验证码!', 1000);
             return;
         }
         formData.append('verifyCodeInput', verifyCode);
@@ -108,7 +108,7 @@ $(function () {
                         window.setTimeout("window.location='/o2o/shop/shopList'", 750);
                     }
                 } else {
-                    $.toast('提交失败!' + data.errMsg);
+                    $.toast('提交失败!' + data.errMsg, 500);
                 }
                 // 点击提交将改变验证码
                 $('#kaptcha_img').click();

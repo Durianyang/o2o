@@ -55,11 +55,11 @@ $(function () {
             contentType: 'application/json',
             success: function (data) {
                 if (data.success) {
-                    $.toast('提交成功！');
+                    $.toast('提交成功！', 500);
                     // 成功后显示新的分类列表
                     getList();
                 } else {
-                    $.toast('提交失败！' + data.errMsg);
+                    $.toast('提交失败！' + data.errMsg, 500);
                 }
             }
         });
@@ -79,10 +79,10 @@ $(function () {
                     dataType: 'json',
                     success: function (data) {
                         if (data.success) {
-                            $.toast('删除成功！');
+                            $.toast('删除成功！', 500);
                             getList();
                         } else {
-                            $.toast('删除失败！' + data.errMsg);
+                            $.toast('删除失败！' + data.errMsg, 500);
                         }
                     }
                 });

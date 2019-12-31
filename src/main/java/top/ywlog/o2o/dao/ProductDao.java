@@ -1,6 +1,9 @@
 package top.ywlog.o2o.dao;
 
+import org.apache.ibatis.annotations.Param;
 import top.ywlog.o2o.entity.Product;
+
+import java.util.List;
 
 /**
  * Author: Durian
@@ -17,5 +20,47 @@ public interface ProductDao
      */
     int insertProduct(Product product);
 
+    /**
+     * 根据productId获取Product
+     *
+     * @param productId 产品ID
+     * @return product
+     */
+    Product getProductById(Long productId);
 
+    /**
+     * 更新product
+     *
+     * @param product 待更新的product
+     * @return 更新记录数
+     */
+    int updateProduct(Product product);
+
+    /**
+     * 查询所有商品列表（可按条件查询）
+     *
+     * @param productCondition 查询条件
+     * @param rowIndex         查询行
+     * @param pageSize         每页行数
+     * @return List<Product>
+     */
+    List<Product> listProduct(@Param("productCondition") Product productCondition,
+                              @Param("rowIndex") int rowIndex,
+                              @Param("pageSize") int pageSize);
+
+    /**
+     * 按条件查寻商品总数
+     *
+     * @param productCondition 查询条件
+     * @return 商品总数
+     */
+    int listProductCount(@Param("productCondition") Product productCondition);
+
+    /**
+     * 按照ID删除商品
+     *
+     * @param productId 商品ID
+     * @return 删除记录数
+     */
+    int deleteProductById(Long productId);
 }

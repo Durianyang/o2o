@@ -14,6 +14,7 @@ import top.ywlog.o2o.enums.ProductStateEnum;
 import top.ywlog.o2o.exceptions.ProductOperationException;
 import top.ywlog.o2o.service.ProductService;
 import top.ywlog.o2o.util.ImageUtil;
+import top.ywlog.o2o.util.PageCalculator;
 import top.ywlog.o2o.util.PathUtil;
 
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class ProductServiceImpl implements ProductService
 
     /**
      * 1、处理缩略图，获取缩略图相对路径并赋值给product
-     * 2、网数据库插入商品数据
+     * 2、往数据库插入商品数据
      * 3、集合productId批量处理商品详情图
      * 4、将商品详情图列表插入tb_product_img中
      *
@@ -90,6 +91,138 @@ public class ProductServiceImpl implements ProductService
         {
             return new ProductExecution(ProductStateEnum.NULL_PRODUCT);
         }
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public Product getProductById(Long productId)
+    {
+        return productDao.getProductById(productId);
+    }
+
+    /**
+     * 更新商品信息
+     * 1、处理缩略图
+     * 2、处理详情图
+     * 3、更新商品信息
+     *
+     * @param product              商品信息
+     * @param thumbnail            缩略图
+     * @param productImgHolderList 详情图
+     * @return top.ywlog.o2o.dto.ProductExecution
+     * @throws ProductOperationException top.ywlog.o2o.exceptions.ProductException
+     */
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public ProductExecution updateProduct(Product product, ImageHolder thumbnail, List<ImageHolder> productImgHolderList)
+    {
+        // 空值判断
+        if (product != null && product.getShop() != null && product.getShop().getShopId() != null)
+        {
+            // 设置默认属性
+            product.setLastEditTime(new Date());
+            // 判断是否更新商品缩略图
+            if (thumbnail != null)
+            {
+                // 先获取原有图片信息
+                Product oldProduct = productDao.getProductById(product.getProductId());
+                if (oldProduct.getImgAddr() != null)
+                {
+                    ImageUtil.deleteImgFile(oldProduct.getImgAddr());
+                }
+                addThumbnail(product, thumbnail);
+            }
+            // 更新详情图
+            if (productImgHolderList != null && productImgHolderList.size() > 0)
+            {
+                deleteProductImgList(product.getProductId());
+                addProductImgList(product, productImgHolderList);
+            }
+            try
+            {
+                // 更新商品信息
+                int count = productDao.updateProduct(product);
+                if (count <= 0)
+                {
+                    throw new ProductOperationException("更新商品信息失败！");
+                }
+                return new ProductExecution(ProductStateEnum.SUCCESS, product);
+            } catch (ProductOperationException e)
+            {
+                throw new ProductOperationException("更新商品信息失败：" + e.toString());
+            }
+        } else
+        {
+            return new ProductExecution(ProductStateEnum.NULL_PRODUCT);
+        }
+    }
+
+    @Override
+    public ProductExecution listProduct(Product productCondition, int pageIndex, int pageSize)
+    {
+        int rowIndex = PageCalculator.calculatorRowIndex(pageIndex, pageSize);
+        List<Product> productList = productDao.listProduct(productCondition, rowIndex, pageSize);
+        int count = productDao.listProductCount(productCondition);
+        ProductExecution pe = new ProductExecution();
+        if (productList != null && productList.size() > 0)
+        {
+            pe.setState(ProductStateEnum.SUCCESS.getState());
+            pe.setStateInfo(ProductStateEnum.SUCCESS.getStateInfo());
+            pe.setProductList(productList);
+            pe.setCount(count);
+        } else
+        {
+            pe.setState(ProductStateEnum.INNER_ERROR.getState());
+            pe.setStateInfo(ProductStateEnum.INNER_ERROR.getStateInfo());
+        }
+        return pe;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public ProductExecution deleteProductById(Long productId)
+    {
+        ProductExecution pe = new ProductExecution();
+        if (productId != null && productId > 0)
+        {
+            try
+            {
+                int count = productDao.deleteProductById(productId);
+                if (count > 0)
+                {
+                    pe.setState(ProductStateEnum.SUCCESS.getState());
+                    pe.setStateInfo(ProductStateEnum.SUCCESS.getStateInfo());
+                    pe.setCount(count);
+                } else
+                {
+                    pe.setState(ProductStateEnum.INNER_ERROR.getState());
+                    pe.setStateInfo(ProductStateEnum.INNER_ERROR.getStateInfo());
+                }
+            } catch (Exception e)
+            {
+                pe.setState(ProductStateEnum.INNER_ERROR.getState());
+                pe.setStateInfo(ProductStateEnum.INNER_ERROR.getStateInfo());
+            }
+        }
+        return pe;
+    }
+
+    /**
+     * 删除某个商品下的所有详情图
+     *
+     * @param productId 商品ID
+     */
+    private void deleteProductImgList(Long productId)
+    {
+        // 根据productId获取原来图片
+        List<ProductImg> productImgList = productImgDao.listProductImg(productId);
+        // 删除原来的图片文件
+        for (ProductImg productImg : productImgList)
+        {
+            ImageUtil.deleteImgFile(productImg.getImgAddr());
+        }
+        // 删除数据库中图片的记录
+        productImgDao.deleteProductImgByProductId(productId);
     }
 
     /**

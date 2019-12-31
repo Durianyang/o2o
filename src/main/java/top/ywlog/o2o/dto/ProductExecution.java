@@ -21,7 +21,7 @@ public class ProductExecution
     private int state;
     /** 状态标识 */
     private String stateInfo;
-    /** 店铺数量 */
+    /** 店品数量 */
     private int count;
     /** 操作的shop(增删改时) */
     private Product product;

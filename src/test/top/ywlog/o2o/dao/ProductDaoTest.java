@@ -66,4 +66,66 @@ public class ProductDaoTest extends BaseTest
         int i = productDao.insertProduct(product);
         System.out.println("i = " + i);
     }
+
+    @Test
+    public void getProductByIdTest()
+    {
+        Product product = productDao.getProductById(10L);
+        System.out.println(product);
+    }
+
+    @Test
+    public void updateProductTest()
+    {
+        Product product = productDao.getProductById(10L);
+        product.setProductName("台湾珍珠奶茶");
+        int i = productDao.updateProduct(product);
+        System.out.println("i = " + i);
+    }
+
+    @Test
+    public void deleteProductImgByProductIdTest()
+    {
+        int i = productImgDao.deleteProductImgByProductId(26L);
+        System.out.println("i = " + i);
+    }
+
+    @Test
+    public void listProductImgTest()
+    {
+        List<ProductImg> imgList = productImgDao.listProductImg(4L);
+        System.out.println("imgList = " + imgList);
+    }
+
+    @Test
+    public void listProductCountTest()
+    {
+        Product product = new Product();
+        Shop shop = new Shop();
+        shop.setShopId(15L);
+        product.setShop(shop);
+        int count = productDao.listProductCount(product);
+        System.out.println("count = " + count);
+    }
+
+    @Test
+    public void listProductTest()
+    {
+        Product product = new Product();
+        Shop shop = new Shop();
+        shop.setShopId(15L);
+        product.setShop(shop);
+        List<Product> productList = productDao.listProduct(product, 0, 5);
+        for (Product product1 : productList)
+        {
+            System.out.println("product1 = " + product1);
+        }
+    }
+
+    @Test
+    public void deleteProductByIdTest()
+    {
+        int i = productDao.deleteProductById(31L);
+        System.out.println("i = " + i);
+    }
 }
