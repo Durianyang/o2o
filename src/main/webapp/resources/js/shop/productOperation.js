@@ -24,10 +24,20 @@ $(function () {
 
                 var optionHtml = '';
                 var optionArr = data.productCategoryList;
-                var optionSelected = product.productCategory.productCategoryId;
+                var optionSelected;
+                if (product.productCategory != null) {
+                    optionSelected = product.productCategory.productCategoryId;
+                }
+                if (!optionSelected) {
+                    optionHtml += '<option disabled="disabled" selected="selected">'
+                        + '无'
+                        + '</option>';
+                }
                 optionArr.map(function (item, index) {
-                    var isSelect = optionSelected === item.productCategoryId ? 'selected'
-                        : '';
+                    if (optionSelected) {
+                        var isSelect = optionSelected === item.productCategoryId ? 'selected'
+                            : '';
+                    }
                     optionHtml += '<option data-value="'
                         + item.productCategoryId
                         + '"'

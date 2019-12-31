@@ -63,4 +63,12 @@ public interface ProductDao
      * @return 删除记录数
      */
     int deleteProductById(Long productId);
+
+    /**
+     * 将某个分类下商品的分类Id置为null
+     *
+     * @param productCategoryId 商品分类ID
+     * @return 更新记录
+     */
+    int updateProductCategoryToNull(Long productCategoryId);
 }

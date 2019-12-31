@@ -128,4 +128,11 @@ public class ProductDaoTest extends BaseTest
         int i = productDao.deleteProductById(31L);
         System.out.println("i = " + i);
     }
+
+    @Test
+    public void updateProductCategoryToNullTest()
+    {
+        int i = productDao.updateProductCategoryToNull(31L);
+        System.out.println("i = " + i);
+    }
 }

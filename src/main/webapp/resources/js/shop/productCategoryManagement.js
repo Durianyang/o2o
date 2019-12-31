@@ -59,7 +59,7 @@ $(function () {
                     // 成功后显示新的分类列表
                     getList();
                 } else {
-                    $.toast('提交失败！' + data.errMsg, 500);
+                    $.toast('提交失败！' + data.errMsg, 1000);
                 }
             }
         });

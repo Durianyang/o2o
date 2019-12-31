@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import top.ywlog.o2o.dao.ProductCategoryDao;
+import top.ywlog.o2o.dao.ProductDao;
 import top.ywlog.o2o.dto.ProductCategoryExecution;
 import top.ywlog.o2o.entity.ProductCategory;
 import top.ywlog.o2o.enums.ProductCategoryEnum;
@@ -22,11 +23,13 @@ import java.util.List;
 public class ProductCategoryServiceImpl implements ProductCategoryService
 {
     private final ProductCategoryDao productCategoryDao;
+    private final ProductDao productDao;
 
     @Autowired
-    public ProductCategoryServiceImpl(ProductCategoryDao productCategoryDao)
+    public ProductCategoryServiceImpl(ProductCategoryDao productCategoryDao, ProductDao productDao)
     {
         this.productCategoryDao = productCategoryDao;
+        this.productDao = productDao;
     }
 
     @Override
@@ -66,6 +69,17 @@ public class ProductCategoryServiceImpl implements ProductCategoryService
     public ProductCategoryExecution deleteProductCategory(Long productCategoryId, Long shopId) throws ProductCategoryOperationException
     {
         // 首先将该分类下所有商品的分类ID置为空
+        try
+        {
+            int count = productDao.updateProductCategoryToNull(productCategoryId);
+            if (count < 0)
+            {
+                throw new ProductCategoryOperationException("商品类别更新失败!");
+            }
+        } catch (Exception e)
+        {
+            throw new ProductCategoryOperationException("商品类别更新失败！");
+        }
         try
         {
             int count = productCategoryDao.deleteProductCategory(productCategoryId, shopId);
