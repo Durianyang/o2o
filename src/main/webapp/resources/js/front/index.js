@@ -28,7 +28,7 @@ $(function () {
                 categoryHtml += ''
                     + '<div class="col-50 shop-classify" data-category=' + item.shopCategoryId + '>'
                     + '<div class="word">'
-                    + '<p class="shop-title">' + item.shopCategoryName + '</p>'
+                    + '<p class="shop-title">' + '<b>' + item.shopCategoryName + '</b>' + '</p>'
                     // + '<p class="shop-desc">' + item.shopCategoryDesc + '</p>'
                     + '</div>'
                     + '<div class="shop-classify-img-warp">'
