@@ -13,6 +13,7 @@ public interface ShopCategoryService
 {
     /**
      * 查询所有shop子分类或某个父分类下的子分类
+     * 新增：可查询父分类
      *
      * @param shopCategory 父类别
      * @return List<ShopCategory>

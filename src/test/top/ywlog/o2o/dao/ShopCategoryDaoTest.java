@@ -36,4 +36,14 @@ public class ShopCategoryDaoTest extends BaseTest
             System.out.println(shopCategory.getShopCategoryName());
         }
     }
+
+    @Test
+    public void listTest2()
+    {
+        List<ShopCategory> list = shopCategoryDao.list(null);
+        for (ShopCategory shopCategory : list)
+        {
+            System.out.println("shopCategory = " + shopCategory.getShopCategoryName());
+        }
+    }
 }
