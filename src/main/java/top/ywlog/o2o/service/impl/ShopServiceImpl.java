@@ -142,24 +142,24 @@ public class ShopServiceImpl implements ShopService
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public ShopExecution listShopPage(Shop shopCondition, int pageIndex, int pageSize)
+{
+    int rowIndex = PageCalculator.calculatorRowIndex(pageIndex, pageSize);
+    List<Shop> shopList = shopDao.listShopPage(shopCondition, rowIndex, pageSize);
+    int count = shopDao.shopCount(shopCondition);
+    ShopExecution shopExecution = new ShopExecution();
+    if (shopList != null && shopList.size() != 0)
     {
-        int rowIndex = PageCalculator.calculatorRowIndex(pageIndex, pageSize);
-        List<Shop> shopList = shopDao.listShopPage(shopCondition, rowIndex, pageSize);
-        int count = shopDao.shopCount(shopCondition);
-        ShopExecution shopExecution = new ShopExecution();
-        if (shopList != null && shopList.size() != 0)
-        {
-            shopExecution.setShopList(shopList);
-            shopExecution.setCount(count);
-            shopExecution.setState(ShopStateEnum.SUCCESS.getState());
-            shopExecution.setStateInfo(ShopStateEnum.SUCCESS.getStateInfo());
-        } else
-        {
-            shopExecution.setState(ShopStateEnum.INNER_ERROR.getState());
-            shopExecution.setStateInfo(ShopStateEnum.INNER_ERROR.getStateInfo());
-        }
-        return shopExecution;
+        shopExecution.setShopList(shopList);
+        shopExecution.setCount(count);
+        shopExecution.setState(ShopStateEnum.SUCCESS.getState());
+        shopExecution.setStateInfo(ShopStateEnum.SUCCESS.getStateInfo());
+    } else
+    {
+        shopExecution.setState(ShopStateEnum.INNER_ERROR.getState());
+        shopExecution.setStateInfo(ShopStateEnum.INNER_ERROR.getStateInfo());
     }
+    return shopExecution;
+}
 
     /**
      * 存储店铺图片

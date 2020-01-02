@@ -54,7 +54,7 @@ public class ShopManagementController
 
     @RequestMapping(value = "/registerShop", method = RequestMethod.POST)
     @ResponseBody
-    private JsonMapResult<Shop> registerShop(HttpServletRequest request)
+    public JsonMapResult<Shop> registerShop(HttpServletRequest request)
     {
         JsonMapResult<Shop> result = new JsonMapResult<>();
         ObjectMapper mapper = new ObjectMapper();
@@ -160,7 +160,7 @@ public class ShopManagementController
 
     @RequestMapping(value = "/getShopInfo", method = RequestMethod.GET)
     @ResponseBody
-    private Map<String, Object> getShopInfo(Long shopId)
+    public Map<String, Object> getShopInfo(Long shopId)
     {
         Map<String, Object> model = new HashMap<>(3);
         if (shopId > 0)
@@ -259,7 +259,7 @@ public class ShopManagementController
 
     @RequestMapping(value = "/getShopList", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> getShopList(@RequestParam(defaultValue = "0") int pageIndex,
+    public Map<String, Object> getShopList(@RequestParam(defaultValue = "1") int pageIndex,
                                            @RequestParam(defaultValue = "100") int pageSize,
                                            HttpServletRequest request)
     {

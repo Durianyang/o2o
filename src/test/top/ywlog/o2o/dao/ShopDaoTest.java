@@ -97,10 +97,11 @@ public class ShopDaoTest
     public void shopListPageTest()
     {
         Shop shop = new Shop();
-        PersonInfo owner = new PersonInfo();
-        owner.setUserId(8L);
-        shop.setOwner(owner);
-        shop.setShopName("旧车");
+        ShopCategory child = new ShopCategory();
+        ShopCategory parent = new ShopCategory();
+        parent.setShopCategoryId(10L);
+        child.setParent(parent);
+        shop.setShopCategory(child);
         int count = shopDao.shopCount(shop);
         System.out.println(count);
         List<Shop> shopList = shopDao.listShopPage(shop, 0, 30);

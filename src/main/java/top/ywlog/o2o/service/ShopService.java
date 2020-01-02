@@ -48,5 +48,5 @@ public interface ShopService
      * @param pageSize      每页大小
      * @return top.ywlog.o2o.dto.ShopExecution
      */
-    ShopExecution listShopPage(Shop shopCondition, int pageIndex, int pageSize) throws OptionalDataException;
+    ShopExecution listShopPage(Shop shopCondition, int pageIndex, int pageSize);
 }
