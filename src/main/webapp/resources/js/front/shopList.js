@@ -1,7 +1,7 @@
 $(function () {
     var loading = false;
     var maxItems = 999;
-    var pageSize = 10;
+    var pageSize = 5;
     var listUrl = '/o2o/front/listShop';
     var searchDivUrl = '/o2o/front/listShopCondition';
     // 起始页码
@@ -51,9 +51,12 @@ $(function () {
             + '&shopCategoryId=' + shopCategoryId + '&shopName=' + shopName;
         loading = true;
         $.getJSON(url, function (data) {
-            if (data.success) {
+            if (data.success && data.count != 0) {
                 maxItems = data.count;
                 var html = '';
+                if (data.shopList == null) {
+                    return;
+                }
                 data.shopList.map(function (item, index) {
                     html += '' + '<div class="card" data-shop-id="'
                         + item.shopId + '">' + '<div class="card-header">'
@@ -88,6 +91,9 @@ $(function () {
                 loading = false;
                 // 刷新陀，显示新加载的店铺卡片
                 $.refreshScroller();
+            } else {
+                // 删除加载提示符
+                $('.infinite-scroll-preloader').hide();
             }
         });
     }
@@ -141,7 +147,7 @@ $(function () {
 
         });
 
-    $('#search').on('input', function (e) {
+    $('#search').on('change', function (e) {
         shopName = e.target.value;
         $('.list-div').empty();
         pageNum = 1;
