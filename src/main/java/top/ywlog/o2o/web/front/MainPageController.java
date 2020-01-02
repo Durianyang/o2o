@@ -2,6 +2,7 @@ package top.ywlog.o2o.web.front;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -9,6 +10,7 @@ import top.ywlog.o2o.entity.HeadLine;
 import top.ywlog.o2o.entity.ShopCategory;
 import top.ywlog.o2o.service.HeadLineService;
 import top.ywlog.o2o.service.ShopCategoryService;
+import top.ywlog.o2o.util.PathUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,15 +25,22 @@ import java.util.Map;
 @RequestMapping("/front")
 public class MainPageController
 {
+    private static final String PATH = "front/";
+
     private final ShopCategoryService shopCategoryService;
     private final HeadLineService headLineService;
 
     @Autowired
-
     public MainPageController(HeadLineService headLineService, ShopCategoryService shopCategoryService)
     {
         this.headLineService = headLineService;
         this.shopCategoryService = shopCategoryService;
+    }
+
+    @RequestMapping("/{pageName}")
+    public String page(@PathVariable String pageName)
+    {
+        return PATH + pageName;
     }
 
     /**
