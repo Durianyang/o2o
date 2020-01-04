@@ -64,6 +64,7 @@ $(function () {
     }
 
     $('#submit').click(function () {
+        $.showIndicator();
         var shop = {};
         if (isEdit) {
             shop.shopId = shopId;
@@ -101,6 +102,7 @@ $(function () {
             cache: false,
             success: function (data) {
                 if (data.success) {
+                    $.hideIndicator();
                     $.toast('提交成功!');
                     if (isEdit) {
                         window.setTimeout("window.location='/o2o/shop/shopManagement?shopId=" + data.row.shopId + "'", 750);
@@ -108,6 +110,7 @@ $(function () {
                         window.setTimeout("window.location='/o2o/shop/shopList'", 750);
                     }
                 } else {
+                    $.hideIndicator();
                     $.toast('提交失败!' + data.errMsg, 500);
                 }
                 // 点击提交将改变验证码

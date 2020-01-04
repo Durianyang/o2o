@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import redis.clients.jedis.Jedis;
 import top.ywlog.o2o.entity.Shop;
 
 /**
@@ -21,5 +22,12 @@ public class BaseTest
     {
         Shop shop = new Shop();
         System.out.println(shop == null);
+    }
+
+    @Test
+    public void redisConnectionTest()
+    {
+        Jedis j = new Jedis("47.93.11.144", 6379);
+        System.out.println(j.ping());
     }
 }

@@ -79,6 +79,7 @@ $(function () {
     });
 
     $('#submit').click(function () {
+        $.showIndicator();
         var product = {};
         product.productName = $('#product-name').val();
         product.productDesc = $('#product-desc').val();
@@ -127,10 +128,12 @@ $(function () {
             cache: false,
             success: function (data) {
                 if (data.success) {
+                    $.hideIndicator();
                     $.toast('提交成功！', 500);
                     $('#kaptcha_img').click();
                     window.setTimeout("window.location='/o2o/shop/productManagement'", 750);
                 } else {
+                    $.hideIndicator();
                     $.toast(data.errMsg, 500);
                     $('#kaptcha_img').click();
                 }
