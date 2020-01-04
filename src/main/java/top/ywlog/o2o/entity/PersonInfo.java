@@ -23,7 +23,7 @@ public class PersonInfo
     /** 用户性别 */
     private String gender;
     /** 用户账号状态 0.禁止 1.启用 */
-    private String enableStatus;
+    private Integer enableStatus;
     /** 账号类别 1.顾客 2.店家 3.管理员 */
     private Integer userType;
     /** 创建时间 */
