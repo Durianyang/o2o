@@ -7,6 +7,8 @@ package top.ywlog.o2o.exceptions;
  */
 public class ProductOperationException extends RuntimeException
 {
+    private static final long serialVersionUID = 1581651211025765712L;
+
     public ProductOperationException(String msg)
     {
         super(msg);
