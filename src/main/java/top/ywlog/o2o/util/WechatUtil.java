@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import top.ywlog.o2o.dto.UserAccessToken;
 import top.ywlog.o2o.dto.WechatUser;
+import top.ywlog.o2o.entity.PersonInfo;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -30,6 +31,23 @@ public class WechatUtil
     private static final String APP_ID = "wx0299cd46dce460dd";
     /** 测试号信息里的appsecret */
     private static final String APPSECRET = "a70998f5f948ebc07d0d1e9b93eeb7e4";
+
+    /**
+     * 将WechatUser里的信息转换成personInfo的信息
+     * @param user WeChatUser
+     * @return PersonInfo
+     */
+    public static PersonInfo getPersonInfoFromRequest(WechatUser user)
+    {
+        PersonInfo personInfo = new PersonInfo();
+        personInfo.setName(user.getNickName());
+        personInfo.setGender(user.getSex() + "");
+        personInfo.setProfileImg(user.getHeadimgurl());
+        personInfo.setEnableStatus(1);
+        return personInfo;
+    }
+
+
     /**
      * 获取UserAccessToken实体类
      *
