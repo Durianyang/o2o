@@ -10,14 +10,14 @@ $(function () {
             $('#product-time').text(new Date(product.lastEditTime).Format("yyyy-MM-dd"));
             $('#product-name').text(product.productName);
             $('#product-desc').append(product.productDesc);
-            if (product.normalPrice == null) {
+            if (product.normalPrice == null && product.normalPrice == "") {
                 product.normalPrice = 0;
             }
-            $('#normal-price').append(product.normalPrice + "元");
-            if (product.promotionPrice == null) {
+            $('#normal-price').append(product.normalPrice);
+            if (product.promotionPrice == null && product.normalPrice == "") {
                 product.promotionPrice = 0;
             }
-            $('#promotion-price').append(product.promotionPrice + "元");
+            $('#promotion-price').append(product.promotionPrice);
 
             var imgListHtml = '';
             product.productImgList.map(function (item, index) {

@@ -145,4 +145,4 @@ String verifyCodeInput = HttpServletRequestUtil.getString(request, "verifyCodeIn
 > 删除商品类别时需要先将该类别下的所有商品的分类ID置为空
 
 
-
+问题：商品详情图显示的缩略图
