@@ -151,3 +151,4 @@ String verifyCodeInput = HttpServletRequestUtil.getString(request, "verifyCodeIn
 加密敏感信息
 
 引入缓存技术
+给可变性小的数据添加缓存
