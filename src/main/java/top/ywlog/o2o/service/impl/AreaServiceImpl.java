@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import top.ywlog.o2o.cache.JedisUtil;
 import top.ywlog.o2o.dao.AreaDao;
 import top.ywlog.o2o.entity.Area;
@@ -42,6 +44,7 @@ public class AreaServiceImpl implements AreaService
     private static final Logger LOGGER = LoggerFactory.getLogger(AreaServiceImpl.class);
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     public List<Area> list()
     {
         List<Area> areaList;
