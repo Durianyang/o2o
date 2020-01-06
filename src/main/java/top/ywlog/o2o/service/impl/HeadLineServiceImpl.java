@@ -27,7 +27,6 @@ import java.util.List;
 @Service
 public class HeadLineServiceImpl implements HeadLineService
 {
-    private static final String HEADLINE_LIST_KEY = "headLineList";
     private static final Logger LOGGER = LoggerFactory.getLogger(HeadLineServiceImpl.class);
     private final JedisUtil.Keys jedisKeys;
     private final JedisUtil.Strings jedisStrings;

@@ -26,7 +26,6 @@ import java.util.List;
 public class ShopCategoryServiceImpl implements ShopCategoryService
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(ShopCategoryServiceImpl.class);
-    private static final String SHOP_CATEGORY_LIST = "shopCategoryList";
     private final JedisUtil.Keys jedisKeys;
     private final JedisUtil.Strings jedisStrings;
     private final ShopCategoryDao shopCategoryDao;

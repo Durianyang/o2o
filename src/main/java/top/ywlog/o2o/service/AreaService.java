@@ -11,6 +11,8 @@ import java.util.List;
  */
 public interface AreaService
 {
+    /** redis数据 库的key值 */
+    String AREA_LIST_KEY = "areaList";
     /**
      * 查询所有区域信息
      * @return 区域信息

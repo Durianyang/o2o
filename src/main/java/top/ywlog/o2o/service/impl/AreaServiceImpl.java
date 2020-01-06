@@ -27,9 +27,6 @@ import java.util.List;
 @Service
 public class AreaServiceImpl implements AreaService
 {
-
-    /** redis数据 库的key值 */
-    private static final String AREA_LIST_KEY = "areaList";
     private static final Logger LOGGER = LoggerFactory.getLogger(AreaServiceImpl.class);
     private final JedisUtil.Keys jedisKeys;
     private final JedisUtil.Strings jedisStrings;

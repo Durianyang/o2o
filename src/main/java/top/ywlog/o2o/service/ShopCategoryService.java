@@ -11,6 +11,8 @@ import java.util.List;
  */
 public interface ShopCategoryService
 {
+    String SHOP_CATEGORY_LIST = "shopCategoryList";
+
     /**
      * 查询所有shop子分类或某个父分类下的子分类
      * 新增：可查询父分类

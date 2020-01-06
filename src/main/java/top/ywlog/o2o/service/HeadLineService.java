@@ -11,6 +11,8 @@ import java.util.List;
  */
 public interface HeadLineService
 {
+    String HEADLINE_LIST_KEY = "headLineList";
+
     /**
      * 根据条件查询头条
      *

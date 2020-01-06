@@ -14,7 +14,9 @@ import top.ywlog.o2o.entity.Shop;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 // 只能加载dao这一个配置文件
-@ContextConfiguration({"classpath:spring/spring-service.xml", "classpath:spring/spring-dao.xml"})
+@ContextConfiguration({"classpath:spring/spring-service.xml",
+        "classpath:spring/spring-dao.xml",
+        "classpath:spring/spring-redis.xml"})
 public class BaseTest
 {
     @Test
