@@ -146,3 +146,6 @@ String verifyCodeInput = HttpServletRequestUtil.getString(request, "verifyCodeIn
 
 
 问题：商品详情图显示的缩略图
+
+#### 十一章
+加密敏感信息
