@@ -11,6 +11,7 @@
         <property name="locations">
             <list>
                 <value>classpath:properties/jdbc.properties</value>
+                <value>classpath:properties/redis.properties</value>
             </list>
         </property>
         <property name="fileEncoding" value="UTF-8"/>

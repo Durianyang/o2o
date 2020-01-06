@@ -19,7 +19,7 @@ public class DESUtil
     private static Key key;
     /** 设置密钥*/
     private static String KEY_STR = "mykey";
-    private static String CHARSETNAME = "UTF-8";
+    private static String CHARSET_NAME = "UTF-8";
     private static String ALGORITHM = "DES";
 
     static
@@ -52,7 +52,7 @@ public class DESUtil
         try
         {
             // 按UTF-8编码
-            byte[] bytes = str.getBytes(CHARSETNAME);
+            byte[] bytes = str.getBytes(CHARSET_NAME);
             // 获取加密对象
             Cipher cipher = Cipher.getInstance(ALGORITHM);
             // 初始化密码信息
@@ -87,7 +87,7 @@ public class DESUtil
             // 解密
             byte[] doFinal = cipher.doFinal(bytes);
             // 返回解密后的信息
-            return new String(doFinal, CHARSETNAME);
+            return new String(doFinal, CHARSET_NAME);
         } catch (Exception e)
         {
             throw new RuntimeException(e);
@@ -98,6 +98,8 @@ public class DESUtil
     {
         System.out.println(getEncryptString("root"));
         System.out.println(getEncryptString("Yw19981016"));
+
+        System.out.println(getDecryptString("lM2+kVMwvQqMi6wmpH5mVw=="));
     }
 
 }
