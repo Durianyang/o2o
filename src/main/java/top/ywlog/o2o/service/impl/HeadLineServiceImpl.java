@@ -27,6 +27,8 @@ import java.util.List;
 @Service
 public class HeadLineServiceImpl implements HeadLineService
 {
+    private static final String HEADLINE_LIST_KEY = "headLineList";
+    private static final Logger LOGGER = LoggerFactory.getLogger(HeadLineServiceImpl.class);
     private final JedisUtil.Keys jedisKeys;
     private final JedisUtil.Strings jedisStrings;
     private final HeadLineDao headLineDao;
@@ -39,21 +41,19 @@ public class HeadLineServiceImpl implements HeadLineService
         this.headLineDao = headLineDao;
     }
 
-    private static final String HEADLINE_LIST_KEY = "headLineList";
-    private static final Logger LOGGER = LoggerFactory.getLogger(HeadLineServiceImpl.class);
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     public List<HeadLine> listHeadLine(HeadLine headLineCondition)
     {
-        String key = null;
+        String key = HEADLINE_LIST_KEY;
         List<HeadLine> headLineList;
         ObjectMapper mapper = new ObjectMapper();
         if (headLineCondition != null && headLineCondition.getEnableStatus() != null)
         {
-            key = HEADLINE_LIST_KEY + "_" + headLineCondition.getEnableStatus();
+            key = key + "_" + headLineCondition.getEnableStatus();
         }
-        if (!jedisKeys.exists(HEADLINE_LIST_KEY) || jedisStrings.get(HEADLINE_LIST_KEY) == null)
+        if (!jedisKeys.exists(key) || jedisStrings.get(key) == null)
         {
             headLineList = headLineDao.listHeadLine(headLineCondition);
             String jsonValue;
