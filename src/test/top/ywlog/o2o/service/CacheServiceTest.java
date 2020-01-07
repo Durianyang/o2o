@@ -17,6 +17,6 @@ public class CacheServiceTest extends BaseTest
     @Test
     public void delTest()
     {
-        cacheService.removeFromCache("headLineList");
+        cacheService.removeFromCache("areaList");
     }
 }

@@ -18,9 +18,9 @@ public class DESUtil
 {
     private static Key key;
     /** 设置密钥*/
-    private static String KEY_STR = "mykey";
-    private static String CHARSET_NAME = "UTF-8";
-    private static String ALGORITHM = "DES";
+    private static final String KEY_STR = "mykey";
+    private static final String CHARSET_NAME = "UTF-8";
+    private static final String ALGORITHM = "DES";
 
     static
     {
@@ -37,7 +37,7 @@ public class DESUtil
             key = generator.generateKey();
         } catch (NoSuchAlgorithmException e)
         {
-           throw new RuntimeException();
+           throw new RuntimeException(e);
         }
     }
 

@@ -7,7 +7,7 @@ import java.util.Objects;
 /**
  * Author: Durian
  * Date: 2020/1/6 19:45
- * Description: 解密
+ * Description: 应用启动时运行，对加密过的properties字段进行解密
  */
 public class EncryptPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer
 {
@@ -28,7 +28,7 @@ public class EncryptPropertyPlaceholderConfigurer extends PropertyPlaceholderCon
     {
         if (isEncryptProp(propertyName))
         {
-            // 对加密的字段进行解密
+            // 对加密的字段调用DESUtils的解密方法解密
             return DESUtil.getDecryptString(propertyValue);
         } else
         {

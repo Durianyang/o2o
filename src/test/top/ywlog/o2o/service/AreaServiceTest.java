@@ -18,7 +18,8 @@ import java.util.List;
 // 只能加载dao这一个配置文件
 @ContextConfiguration({"classpath:spring/spring-service.xml",
         "classpath:spring/spring-dao.xml",
-        "classpath:spring/spring-redis.xml"})
+        "classpath:spring/spring-redis.xml",
+        "classpath:spring/spring-aop.xml"})
 public class AreaServiceTest
 {
     @Autowired
