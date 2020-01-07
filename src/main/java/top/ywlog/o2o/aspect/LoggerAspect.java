@@ -27,7 +27,7 @@ public class LoggerAspect
     public void loggerAspectToServiceImpl() {}
 
     // 定义web切面
-    @Pointcut("execution(* top.ywlog.o2o.web.*.*(..))")
+    @Pointcut("execution(* top.ywlog.o2o.web.*.*.*(..))")
     public void loggerAspectToWeb() {}
 
     @Around("loggerAspectToWeb()")
@@ -47,6 +47,7 @@ public class LoggerAspect
             LOGGER.info("请求方式:" + request.getMethod());
             LOGGER.info("请求类方法:" + pjp.getSignature());
             LOGGER.info("请求类方法参数:" + Arrays.toString(pjp.getArgs()));
+            LOGGER.info("===============请求内容===============");
             // 执行被拦截的方法
             Object[] args = pjp.getArgs();
             startTime = System.currentTimeMillis();
@@ -55,10 +56,10 @@ public class LoggerAspect
         } catch (Throwable e)
         {
             // 发生异常时
-            LOGGER.error(pjp.getSignature() + "执行失败:" + e.getMessage());
+            LOGGER.error(pjp.getSignature().getName() + "执行失败:" + e.getMessage());
         }
         // 方法正常执行完毕后
-        LOGGER.info(pjp.getSignature() + "执行完毕，耗时:" + (endTime - startTime) + "ms");
+        LOGGER.info(pjp.getSignature().getName() + "执行完毕，耗时:" + (endTime - startTime) + "ms");
         LOGGER.info("--------------返回内容----------------");
         LOGGER.info("Response内容:" + rtValue);
         LOGGER.info("--------------返回内容----------------");
@@ -81,9 +82,9 @@ public class LoggerAspect
             endTime = System.currentTimeMillis();
         } catch (Throwable e)
         {
-            LOGGER.error(pjp.getSignature() + "执行失败:" + e.getMessage());
+            LOGGER.error(pjp.getSignature().getName() + "执行失败:" + e.getMessage());
         }
-        LOGGER.info(pjp.getSignature() + "执行完毕，耗时:" + (endTime - startTime) + "ms");
+        LOGGER.info(pjp.getSignature().getName() + "执行完毕，耗时:" + (endTime - startTime) + "ms");
         LOGGER.info("--------------返回内容----------------");
         LOGGER.info("返回内容:" + rtValue);
         LOGGER.info("--------------返回内容----------------");
