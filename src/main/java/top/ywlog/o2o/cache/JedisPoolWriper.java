@@ -16,8 +16,9 @@ public class JedisPoolWriper
 {
     private JedisPool jedisPool;
 
-    public JedisPoolWriper(final JedisPoolConfig jedisPoolConfig, final String host, final int port)
+    public JedisPoolWriper(final JedisPoolConfig jedisPoolConfig, final String host,
+                           final int port, final String password)
     {
-        jedisPool = new JedisPool(jedisPoolConfig, host, port);
+        jedisPool = new JedisPool(jedisPoolConfig, host, port, 3000, password);
     }
 }

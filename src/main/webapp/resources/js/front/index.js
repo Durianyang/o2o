@@ -6,7 +6,7 @@ $(function () {
             // 获取头条列表
             var headLineList = data.headLineList;
             var swiperHtml = '';
-            // 遍历头天列表
+            // 遍历头条列表
             headLineList.map(function (item, index) {
                 swiperHtml += ''
                     + '<div class="swiper-slide img-wrap">'

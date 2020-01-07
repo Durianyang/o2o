@@ -14,7 +14,7 @@ public class EncryptPropertyPlaceholderConfigurer extends PropertyPlaceholderCon
     /**
      * 需要加密的字段数组
      */
-    private String[] encryptPropNames = {"jdbc.username", "jdbc.password"};
+    private String[] encryptPropNames = {"jdbc.username", "jdbc.password", "redis.password"};
 
     /**
      * 对关键属性进行转换

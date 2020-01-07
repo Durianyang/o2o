@@ -8,7 +8,7 @@ package top.ywlog.o2o.service;
 public interface CacheService
 {
     /**
-     * 根据key的前缀删除匹配该模式下的锁有key-value
+     * 根据key的前缀删除匹配该模式下的所有key-value
      * @param keyPrefix key前缀
      */
     void removeFromCache(String keyPrefix);

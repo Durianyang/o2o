@@ -31,6 +31,7 @@ public class BaseTest
     public void redisConnectionTest()
     {
         Jedis j = new Jedis("47.93.11.144", 6379);
+        j.auth("Yw19981016");
         System.out.println(j.ping());
     }
 }
