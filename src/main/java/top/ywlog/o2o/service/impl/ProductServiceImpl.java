@@ -94,7 +94,6 @@ public class ProductServiceImpl implements ProductService
     }
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS)
     public Product getProductById(Long productId)
     {
         return productDao.getProductById(productId);

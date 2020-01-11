@@ -9,42 +9,31 @@ import top.ywlog.o2o.dto.JsonMapResult;
 import top.ywlog.o2o.entity.Product;
 import top.ywlog.o2o.service.ProductService;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Author: Durian
- * Date: 2020/1/2 22:14
+ * Date: 2020/1/11 16:04
  * Description:
  */
 @Controller
 @RequestMapping("/front")
 public class ProductDetailController
 {
-    private final ProductService productService;
-
     @Autowired
-    public ProductDetailController(ProductService productService)
-    {
-        this.productService = productService;
-    }
+    private ProductService productService;
 
-    @RequestMapping(value = "/getProductDetailInfo", method = RequestMethod.GET)
+    @RequestMapping(value = "/getProductDetail", method = RequestMethod.GET)
     @ResponseBody
-    private JsonMapResult<Product> getProductDetailInfo(Long productId)
+    public JsonMapResult<Product> getProductDetail(Long productId)
     {
         JsonMapResult<Product> result = new JsonMapResult<>();
-        Product product = null;
-        if (productId != null && productId > 0)
+        Product product = productService.getProductById(productId);
+        if (product != null && product.getProductId() != null)
         {
-            product = productService.getProductById(productId);
             result.setRow(product);
             result.setSuccess(true);
         } else
         {
             result.setSuccess(false);
-            result.setErrMsg("获取商品信息失败!");
         }
         return result;
     }

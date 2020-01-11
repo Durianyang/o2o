@@ -1,6 +1,6 @@
 $(function () {
     var productId = getQueryParam('productId');
-    var productUrl = '/o2o/front/getProductDetailInfo?productId='
+    var productUrl = '/o2o/front/getProductDetail?productId='
         + productId;
 
     $.getJSON(productUrl, function (data) {

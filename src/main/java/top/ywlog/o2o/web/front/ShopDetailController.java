@@ -32,14 +32,14 @@ public class ShopDetailController
 {
     private final ShopService shopService;
     private final ProductCategoryService productCategoryService;
-    private final ProductService productService;
+    @Autowired
+    private ProductService productService;
 
     @Autowired
-    public ShopDetailController(ProductCategoryService productCategoryService, ShopService shopService, ProductService productService)
+    public ShopDetailController(ProductCategoryService productCategoryService, ShopService shopService)
     {
         this.productCategoryService = productCategoryService;
         this.shopService = shopService;
-        this.productService = productService;
     }
 
     @RequestMapping(value = "getShopDetailInfo", method = RequestMethod.GET)

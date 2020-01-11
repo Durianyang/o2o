@@ -70,7 +70,7 @@ public class ProductDaoTest extends BaseTest
     @Test
     public void getProductByIdTest()
     {
-        Product product = productDao.getProductById(10L);
+        Product product = productDao.getProductById(30L);
         System.out.println(product);
     }
 

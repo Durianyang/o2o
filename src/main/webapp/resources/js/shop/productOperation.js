@@ -115,6 +115,7 @@ $(function () {
         // 获取表单中的验证码
         var verifyCodeActual = $('#j_captcha').val();
         if (!verifyCodeActual) {
+            $.hideIndicator();
             $.toast('请输入验证码！', 1000);
             return;
         }

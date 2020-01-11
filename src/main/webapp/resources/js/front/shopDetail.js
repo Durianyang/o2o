@@ -122,15 +122,14 @@ $(function () {
             addItems(pageSize, pageNum);
         });
 
-    $('.list-div')
-        .on(
-            'click',
-            '.card',
-            function (e) {
-                var productId = e.currentTarget.dataset.productId;
-                window.location.href = '/o2o/front/productDetail?productId='
-                    + productId;
-            });
+    $('.list-div').on(
+        'click',
+        '.card',
+        function (e) {
+            var productId = e.currentTarget.dataset.productId;
+            window.location.href = '/o2o/front/productDetail?productId='
+                + productId;
+        });
 
     $('#search').on('change', function (e) {
         productName = e.target.value;

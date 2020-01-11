@@ -120,8 +120,8 @@
                 and s.owner_id = #{shopCondition.owner.userId}
             </if>
         </where>
-        and s.area_id = a.area_id
-        and s.shop_category_id = sc.shop_category_id
+            and s.area_id = a.area_id
+            and s.shop_category_id = sc.shop_category_id
         order by s.priority desc
         limit #{rowIndex}, #{pageSize}
     </select>

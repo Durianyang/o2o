@@ -97,4 +97,10 @@ public class ProductServiceTest extends BaseTest
         ProductExecution pe = productService.updateProduct(p, imageHolder, productImgList);
         assert Objects.equals(ProductStateEnum.SUCCESS.getStateInfo(), pe.getStateInfo());
     }
+
+    @Test
+    public void getProductByIdTest()
+    {
+        System.out.println(productService.getProductById(30L));
+    }
 }

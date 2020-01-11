@@ -89,6 +89,7 @@ $(function () {
         formData.append('shop', JSON.stringify(shop));
         var verifyCode = $('#j_kaptcha').val();
         if (!verifyCode) {
+            $.hideIndicator();
             $.toast('请输入验证码!', 1000);
             return;
         }
@@ -111,7 +112,7 @@ $(function () {
                     }
                 } else {
                     $.hideIndicator();
-                    $.toast('提交失败!' + data.errMsg, 500);
+                    $.toast(data.errMsg, 500);
                 }
                 // 点击提交将改变验证码
                 $('#kaptcha_img').click();
