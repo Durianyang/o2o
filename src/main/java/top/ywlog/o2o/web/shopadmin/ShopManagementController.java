@@ -266,10 +266,10 @@ public class ShopManagementController
         Map<String, Object> model = new HashMap<>(3);
 //        // 测试
         PersonInfo user = new PersonInfo();
-//        user.setUserId(8L);
-//        user.setName("测试");
-//        request.getSession().setAttribute("user", user);
-        //
+        user.setUserId(8L);
+        user.setName("测试");
+        request.getSession().setAttribute("user", user);
+
         user = (PersonInfo) request.getSession().getAttribute("user");
         Shop shopCondition = new Shop();
         shopCondition.setOwner(user);
