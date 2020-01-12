@@ -91,7 +91,6 @@ public class ShopManagementController
         }
         if (shop != null && shopImg != null)
         {
-            // 测试用
             PersonInfo owner = (PersonInfo) request.getSession().getAttribute("user");
             shop.setOwner(owner);
             ShopExecution se = new ShopExecution();
@@ -116,8 +115,10 @@ public class ShopManagementController
                 List<Shop> shopList = (List<Shop>) request.getSession().getAttribute("shopList");
                 if (shopList == null || shopList.size() == 0)
                 {
+                    // 此时为第一次创建店铺
                     shopList = new ArrayList<>();
                 }
+                // 新建店铺添加到session中
                 shopList.add(se.getShop());
                 request.getSession().setAttribute("shopList", shopList);
 
@@ -264,13 +265,13 @@ public class ShopManagementController
                                            HttpServletRequest request)
     {
         Map<String, Object> model = new HashMap<>(3);
-//        // 测试
-        PersonInfo user = new PersonInfo();
-        user.setUserId(8L);
-        user.setName("测试");
-        request.getSession().setAttribute("user", user);
+        // 测试
+//        PersonInfo user = new PersonInfo();
+//        user.setUserId(8L);
+//        user.setName("测试");
+//        request.getSession().setAttribute("user", user);
 
-        user = (PersonInfo) request.getSession().getAttribute("user");
+        PersonInfo user = (PersonInfo) request.getSession().getAttribute("user");
         Shop shopCondition = new Shop();
         shopCondition.setOwner(user);
         try
@@ -279,6 +280,8 @@ public class ShopManagementController
             model.put("success", true);
             model.put("shopList", se.getShopList());
             model.put("user", user);
+            // 获取店铺列表后，将店铺放入session中
+            request.getSession().setAttribute("shopList", se.getShopList());
         } catch (Exception e)
         {
             model.put("success", false);
@@ -295,6 +298,7 @@ public class ShopManagementController
         long shopId = HttpServletRequestUtil.getLong(request, "shopId");
         if (shopId <= 0)
         {
+            // 当前操作店铺放入session中
             Object currentShopObj = request.getSession().getAttribute("currentShop");
             if (currentShopObj == null)
             {

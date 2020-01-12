@@ -28,4 +28,32 @@
     <!--  mapping=/js/**  :表示访问静态资源的路径的形式    可以访问 /js/下的静态资源或者所有的子目录下的静态资源-->
     <mvc:resources location="/resources/" mapping="/resources/**"/>
 
+    <!-- 4.扫描web相关的bean -->
+    <context:component-scan base-package="top.ywlog.o2o.web" />
+    <!-- 5.权限拦截器 -->
+    <mvc:interceptors>
+        <!--检验是否对该店铺有操作权限的拦截器-->
+        <mvc:interceptor>
+            <mvc:mapping path="/shop/**" />
+            <bean id="ShopInterceptor" class="top.ywlog.o2o.interceptor.shop.ShopLoginInterceptor" />
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/shop/**" />
+            <!-- shoplist page -->
+            <mvc:exclude-mapping path="/shop/getShopList" />
+            <mvc:exclude-mapping path="/shop/shopList" />
+
+            <mvc:exclude-mapping path="/shop/getShopManagementInfo" />
+            <mvc:exclude-mapping path="/shop/shopManagement" />
+
+            <mvc:exclude-mapping path="/shop/getShopInitInfo" />
+            <mvc:exclude-mapping path="/shop/registerShop" />
+            <mvc:exclude-mapping path="/shop/shopOperation" />
+
+            <mvc:exclude-mapping path="/shop/logout" />
+            <bean id="ShopPermissionInterceptor"
+                  class="top.ywlog.o2o.interceptor.shop.ShopPermissionInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 </beans>

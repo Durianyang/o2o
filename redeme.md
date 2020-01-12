@@ -152,3 +152,9 @@ String verifyCodeInput = HttpServletRequestUtil.getString(request, "verifyCodeIn
 
 引入缓存技术
 给可变性小的数据添加缓存
+
+
+添加拦截器
+实现登录验证
+实现店铺权限验证
+拦截过滤
