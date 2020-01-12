@@ -13,6 +13,7 @@ $(function () {
         var verifyCode = $('#j_kaptcha').val();
         // var needVerify = false;
         if (!verifyCode) {
+            $.hideIndicator();
             $.toast('请输入验证码！', 1000);
             return;
         }

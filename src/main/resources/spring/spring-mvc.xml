@@ -38,6 +38,10 @@
             <bean id="ShopInterceptor" class="top.ywlog.o2o.interceptor.shop.ShopLoginInterceptor" />
         </mvc:interceptor>
         <mvc:interceptor>
+            <mvc:mapping path="/front/**" />
+            <bean id="ShopInterceptor" class="top.ywlog.o2o.interceptor.shop.ShopLoginInterceptor" />
+        </mvc:interceptor>
+        <mvc:interceptor>
             <mvc:mapping path="/shop/**" />
             <!-- shoplist page -->
             <mvc:exclude-mapping path="/shop/getShopList" />

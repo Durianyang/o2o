@@ -22,6 +22,9 @@ $(function () {
 
     function handleShopList(data) {
         var html = '';
+        if (data == null) {
+            return;
+        }
         data.map(function (item, index) {
             html += '<div class="row row-shop"><div class="col-40">'
                 + item.shopName + '</div><div class="col-40">'
