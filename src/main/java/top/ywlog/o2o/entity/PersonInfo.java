@@ -2,6 +2,7 @@ package top.ywlog.o2o.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,8 +11,9 @@ import java.util.Date;
  * Description: 用户信息实体类,后期可做优化，将性别、账号状态和账号类别改为枚举类型
  */
 @Data
-public class PersonInfo
+public class PersonInfo implements Serializable
 {
+    private static final long serialVersionUID = 2984690066312663457L;
     /** 用户主键Id,用户数量多，使用Long更好 */
     private Long userId;
     /** 用户名称 */

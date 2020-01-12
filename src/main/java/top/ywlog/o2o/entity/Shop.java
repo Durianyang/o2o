@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
@@ -13,8 +14,9 @@ import java.util.Date;
  * Description: 店铺实体类
  */
 @Data
-public class Shop
+public class Shop implements Serializable
 {
+    private static final long serialVersionUID = -7190259028295738575L;
     /** 店铺Id */
     private Long shopId;
     /** 店铺名称 */

@@ -3,6 +3,7 @@ package top.ywlog.o2o.entity;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -12,8 +13,9 @@ import java.util.Date;
  */
 @Getter
 @Setter
-public class ShopCategory
+public class ShopCategory implements Serializable
 {
+    private static final long serialVersionUID = -6433371543087775326L;
     /** 主键Id */
     private Long shopCategoryId;
     /** 店铺分类名称 */

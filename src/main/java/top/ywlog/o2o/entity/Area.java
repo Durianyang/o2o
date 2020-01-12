@@ -2,6 +2,7 @@ package top.ywlog.o2o.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,8 +11,9 @@ import java.util.Date;
  * Description: 区域实体类--对应数据库表tb_area
  */
 @Data
-public class Area
+public class Area implements Serializable
 {
+    private static final long serialVersionUID = 9199681717711083331L;
     /** 主键ID */
     private Integer areaId;
     /** 区域名称 */

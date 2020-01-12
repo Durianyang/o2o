@@ -2,6 +2,7 @@ package top.ywlog.o2o.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,8 +11,9 @@ import java.util.Date;
  * Description: 头条实体类
  */
 @Data
-public class HeadLine
+public class HeadLine implements Serializable
 {
+    private static final long serialVersionUID = -3714883809804342363L;
     /** 主键Id */
     private Long lineId;
     /** 头条名称 */

@@ -2,6 +2,7 @@ package top.ywlog.o2o.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,8 +11,9 @@ import java.util.Date;
  * Description: 商品分类
  */
 @Data
-public class ProductCategory
+public class ProductCategory implements Serializable
 {
+    private static final long serialVersionUID = 4527804663033514951L;
     /** 主键Id */
     private Long productCategoryId;
     /** 关联外键Id */

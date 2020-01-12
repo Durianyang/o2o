@@ -2,6 +2,7 @@ package top.ywlog.o2o.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,8 +11,9 @@ import java.util.Date;
  * Description: 本地账号
  */
 @Data
-public class LocalAuth
+public class LocalAuth implements Serializable
 {
+    private static final long serialVersionUID = 8752389008179710760L;
     /** 主键Id */
     private Long localAuthId;
     /** 账号名称 */
