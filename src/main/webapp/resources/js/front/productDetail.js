@@ -10,14 +10,20 @@ $(function () {
             $('#product-time').text(new Date(product.lastEditTime).Format("yyyy-MM-dd"));
             $('#product-name').text(product.productName);
             $('#product-desc').append(product.productDesc);
-            if (product.normalPrice == null && product.normalPrice == "") {
-                product.normalPrice = 0;
+            if (product.normalPrice != null && product.normalPrice.length !== 0 &&
+                product.promotionPrice != null && product.promotionPrice.length !== 0) {
+                $('#price').removeAttr("hidden");
+                $('#normal-price').html('<s>￥' + product.normalPrice + '</s>');
+                $('#promotion-price').html("￥" + product.promotionPrice);
+            } else if (product.normalPrice != null || product.promotionPrice === undefined) {
+                $('#price').removeAttr("hidden");
+                $('#normal-price').html("￥" + product.normalPrice);
             }
-            $('#normal-price').append(product.normalPrice);
-            if (product.promotionPrice == null && product.normalPrice == "") {
-                product.promotionPrice = 0;
+            if (product.point != 0 && product.point != null) {
+                $('#product-point').text("购买可获得" + product.point + "积分");
+            } else {
+                $('#product-point').text("购买该商品无积分奖励");
             }
-            $('#promotion-price').append(product.promotionPrice);
 
             var imgListHtml = '';
             product.productImgList.map(function (item, index) {

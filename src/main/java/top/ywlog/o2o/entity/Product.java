@@ -41,4 +41,6 @@ public class Product implements Serializable
     private ProductCategory productCategory;
     /** 所属商铺 */
     private Shop shop;
+    /** 积分 */
+    private Integer point;
 }

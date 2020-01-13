@@ -9,3 +9,7 @@
     margin: 1%;
     overflow: hidden;
 }
+#promotion-price {
+    color: red;
+    size: 4px;
+}
