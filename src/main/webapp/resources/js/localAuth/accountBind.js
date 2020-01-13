@@ -12,6 +12,11 @@ $(function () {
         // 获取输入的验证码
         var verifyCode = $('#j_kaptcha').val();
         // var needVerify = false;
+        if (username == null || username === "" || password == null || password === "") {
+            $.hideIndicator();
+            $.toast('账号密码不能为空！！', 1000);
+            return;
+        }
         if (!verifyCode) {
             $.hideIndicator();
             $.toast('请输入验证码！', 1000);

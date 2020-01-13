@@ -35,10 +35,9 @@
         <!--检验是否对该店铺有操作权限的拦截器-->
         <mvc:interceptor>
             <mvc:mapping path="/shop/**" />
-            <bean id="ShopInterceptor" class="top.ywlog.o2o.interceptor.shop.ShopLoginInterceptor" />
-        </mvc:interceptor>
-        <mvc:interceptor>
             <mvc:mapping path="/front/**" />
+            <mvc:mapping path="/local/**" />
+            <mvc:exclude-mapping path="/local/login" />
             <bean id="ShopInterceptor" class="top.ywlog.o2o.interceptor.shop.ShopLoginInterceptor" />
         </mvc:interceptor>
         <mvc:interceptor>

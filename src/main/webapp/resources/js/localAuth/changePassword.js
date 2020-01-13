@@ -7,7 +7,7 @@ $(function () {
     $('#back').click(function () {
         if (userType == 2) {
             window.location.href = '/o2o/shop/shopList';
-        } else {
+        } else if (userType == 1){
             window.location.href = '/o2o/front/index';
         }
     });
